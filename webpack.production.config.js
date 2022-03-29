@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     "hello-world": "./src/hello-world.js",
-    brain: "./src/brain.js",
+    "brain": "./src/brain.js",
   },
   output: {
     filename: "[name].[contenthash].js",
@@ -14,6 +14,11 @@ module.exports = {
     publicPath: "",
   },
   mode: "production",
+  optimization:{
+    splitChunks:{
+      chunks: "all"
+    }
+  },
   module: {
     rules: [
       {

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: {
     "hello-world": "./src/hello-world.js",
+    "brain": "./src/brain.js"
   },
   output: {
     filename: "[name].bundle.js",
@@ -58,7 +59,13 @@ module.exports = {
       filename: "hello-world.html",
       template: path.join(__dirname, "./src/index.pug"),
       minify: false,
-      chunks: "hello-world",
+      chunks: ["hello-world"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "brain.html",
+      template: path.join(__dirname, "./src/index.pug"),
+      minify: false,
+      chunks: ["brain"],
     }),
   ],
 };
