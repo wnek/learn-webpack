@@ -3,25 +3,31 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    "hello-world": "./src/hello-world.js",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "./dist"),
     publicPath: "",
   },
-  mode: "none",
+  mode: "development",
   devServer: {
     port: 9000,
     static: {
       directory: path.resolve(__dirname, "./dist"),
     },
     devMiddleware: {
-      index: "index.html",
+      index: "hello-world.html",
       writeToDisk: true,
     },
   },
   module: {
     rules: [
+      {
+        test: /\.pug$/,
+        loader: "@webdiscus/pug-loader",
+      },
       {
         test: /\.(png|jpg)$/,
         type: "asset/resource",
@@ -46,5 +52,13 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "hello-world.html",
+      template: path.join(__dirname, "./src/index.pug"),
+      minify: false,
+      chunks: "hello-world",
+    }),
+  ],
 };

@@ -17,6 +17,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.pug$/,
+        loader: "@webdiscus/pug-loader",
+      },
+      {
         test: /\.(png|jpg)$/,
         type: "asset/resource",
       },
@@ -45,6 +49,17 @@ module.exports = {
       filename: "[name].[contenthash].css",
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "hello-world.html",
+      template: path.join(__dirname, "./src/index.pug"),
+      minify: false,
+      chunks: ["hello-world"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "brain.html",
+      template: path.join(__dirname, "./src/index.pug"),
+      minify: false,
+      chunks: ["brain"],
+    }),
   ],
 };

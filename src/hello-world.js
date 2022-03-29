@@ -7,6 +7,3 @@ heading.render();
 
 const helloWorldButton = new HelloWorldButton();
 helloWorldButton.render();
-
-const brain = new BrainImage();
-brain.render();
